@@ -1,0 +1,14 @@
+Create a Junit test which verifies the CRUD operations:
+
+[source,java]
+.src/test/java/example/micronaut/GenreControllerTest.java
+----
+include::{sourceDir}/src/test/java/example/micronaut/GenreControllerTest.java[]
+----
+<1> Annotate the class with `@MicronautTest` to let Micronaut starts the embedded server and inject the beans. More info: https://micronaut-projects.github.io/micronaut-test/latest/guide/index.html[https://micronaut-projects.github.io/micronaut-test/latest/guide/index.html].
+<2> Inject the `HttpClient` bean in the application context.
+<3> Creating HTTP Requests is easy thanks to Micronaut's fluid API.
+<4> If you care just about the object in the response use `retrieve`.
+<5> Sometimes, receiving just the object is not enough and you need information about the response. In this case, instead of `retrieve` you should use the `exchange` method.
+
+include::{commondir}/common-testApp.adoc[]

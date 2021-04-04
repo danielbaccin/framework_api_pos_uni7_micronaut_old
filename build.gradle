@@ -1,0 +1,58 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "6.1.0"
+    id "io.micronaut.application" version "1.1.0"
+}
+
+version "0.1"
+group "example.micronaut"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime "netty"
+    testRuntime "junit5"
+}
+
+dependencies {
+    //tag::validator[]
+    annotationProcessor("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-validation")
+    //end::validator[]
+    //tag::micronaut-graal[]
+    //end::micronaut-graal[]
+    //tag::micronaut-data[]
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    //end::micronaut-data[]
+    //tag::svm[]
+    compileOnly("org.graalvm.nativeimage:svm")
+    //end::svm[]
+    implementation("io.micronaut:micronaut-http-client")
+
+    //tag::jpa[]
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    runtimeOnly("com.h2database:h2")
+    //end::jpa[]
+
+    //tag::postgresql[]
+    runtimeOnly("org.postgresql:postgresql")
+    //end::postgresql[]
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor "org.projectlombok:lombok:1.18.12"
+
+}
+
+mainClassName = "example.micronaut.Application"
+
+java {
+    sourceCompatibility = JavaVersion.toVersion('1.8')
+    targetCompatibility = JavaVersion.toVersion('1.8')
+}
+
+

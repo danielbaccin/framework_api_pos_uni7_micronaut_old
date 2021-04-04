@@ -1,0 +1,58 @@
+To mark the transaction demarcations, we use the https://docs.oracle.com/javaee/7/api/javax/transaction/Transactional.html[Java EE 7 javax.transaction.Transactional annotation].
+
+But to use it, you have to include the `micronaut-data-processor` dependency in your annotation processor configuration:
+
+[source, groovy]
+.build.gradle
+----
+...
+..
+dependencies {
+...
+..
+.
+include::{sourceDir}/build.gradle[tag="micronaut-data"]
+}
+----
+
+Next, create an interface to define the operations to access the database:
+
+[source,java]
+.src/main/java/example/micronaut/GenreRepository.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepository.java[]
+----
+
+And the implementation:
+
+[source,java]
+.src/main/java/example/micronaut/GenreRepositoryImpl.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="package"]
+
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="import"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="importContent"]
+
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="clazz"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="clazzContent"]
+
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="findById"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="findByIdContent"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="save"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="saveContent"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="deleteById"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="deleteByIdContent"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="findAll"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="findAllContent"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="update"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="updateContent"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="saveWithException"]
+include::{sourceDir}/src/main/java/example/micronaut/GenreRepositoryImpl.java[tag="saveWithExceptionContent"]
+----
+
+<1> Use `javax.inject.Singleton` to designate a class as a singleton.
+<2> Inject easily an `EntityManager`.
+<3> All database access needs to be wrapped inside a transaction. As the method
+only reads data from the database, annotate it with `@ReadOnly`.
+<4> This method modifies the database, thus it is annoated with `@Transactional`.
+
