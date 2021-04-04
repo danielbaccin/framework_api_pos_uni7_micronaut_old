@@ -48,7 +48,7 @@ dependencies {
 
 }
 
-mainClassName = "example.micronaut.Application"
+mainClassName = "com.kenuiworks.frameworkbox.FrameworkBoxApplication"
 
 java {
     sourceCompatibility = JavaVersion.toVersion('1.8')
